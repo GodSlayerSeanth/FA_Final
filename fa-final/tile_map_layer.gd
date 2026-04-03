@@ -1,8 +1,9 @@
 extends TileMapLayer
 @export var Input_Grid = [
-[1, 1, 1], # Row 0
-[2, 2, 1], # Row 1
-[3, 2, 2]  # Row 2
+[1, 1, 1 ,1, 1], # Row 0
+[2, 2, 2, 1, 1], # Row 1
+[3, 3, 2, 2, 1],  # Row 2
+[3, 3, 3, 2, 1]
 ]
 
 var Seg_w_Rots
