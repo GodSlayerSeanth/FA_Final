@@ -1,4 +1,5 @@
 extends TileMapLayer
+
 @export var Input_Grid = [
 [1, 1, 1 ,1, 1], # Row 0
 [2, 2, 2, 1, 1], # Row 1
@@ -314,11 +315,15 @@ func generate_map():
 
 
 # PLAYER REFERENCE
-@onready var player = get_node("Player") # Not sure how this works because I've never used godot before...
+@export var player: Node2D
 
 func _process(delta: float) -> void:
 	if player == null:
 		return
+	
+	var chunk = get_player_chunk(player.global_position)
+	print("Player chunk = ", chunk)
+	
 	update_chunks(player.global_position) # ___STILL NEED PLAYER NODE___
 	update_chunk_states()
 
@@ -337,7 +342,7 @@ func get_player_chunk(player_pos: Vector2) -> Vector2i:
 	# Convert world position into chuck coordinates
 		# Ex. world x=15, chunk_size=10 => chunk_pos.x=1
 	return Vector2i(
-		floor(player_pos.x / chunk_size), 
+		floor(player_pos.x / chunk_size), # Might need to factor in tile sizes here...
 		floor(player_pos.y / chunk_size)
 	)
 
@@ -487,4 +492,4 @@ func apply_neighbor_constraints(grid, chunk_pos):
 		# BOTTOM Neighbor: Matches top edge
 		elif offset == Vector2i(0, 1):
 			for x in range(chunk_size):
-				grid[chunk_size][x] = neighbor[0][x]
+				grid[chunk_size - 1][x] = neighbor[0][x]
