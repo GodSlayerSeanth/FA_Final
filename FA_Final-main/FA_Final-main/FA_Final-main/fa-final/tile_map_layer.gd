@@ -130,8 +130,7 @@ func get_valids(source_3d_array: Array, pattern_2d_array: Array) -> Array:
 			matches.append(slice)
 			
 	return matches
-		
-		
+
 ## Helper function to compare a single 2D slice against the pattern
 func _is_match(slice: Array, pattern: Array, height: int, width: int) -> bool:
 	for y in range(height):
@@ -148,57 +147,6 @@ func _is_match(slice: Array, pattern: Array, height: int, width: int) -> bool:
 				
 	return true
 	
-#basic backtracking algorithm for if there are no valid matches
-func backtrack(arr: Array, x: int, y: int) -> Variant:
-	var size = arr.size()
-	
-	#move down row by row
-	if x>= size - 1: #move on once x is out of bounds
-		x = 0
-		y += 1
-	
-	#BASE CASE: once there are no y's to read, the grid is done
-	if y >= size - 1:
-		return arr
-		
-	#store current grid
-	var curr_vals = [
-		[arr[y][x], arr[y][x+1]],
-		[arr[y+1][x], arr[y+1][x+1]]
-	]
-	#get valid segment options
-	var options = get_valids(Seg_w_Rots, curr_vals)
-	options.shuffle() #randomize
-	#save current state so we can "undo" or backtrack when we fail
-	var backup_grid = [
-		arr[y][x], arr[y][x+1],
-		arr[y+1][x], arr[y+1][x+1]
-	]
-	
-	for choice in options:
-		arr[y][x] = choice[0][0] #top left
-		arr[y][x+1] = choice[0][1] #top right - moves one step to the right
-		arr[y+1][x] = choice[1][0] #bottom left - moves one step down
-		arr[y+1][x+1] = choice[1][1] #bottom right - moves one step down and right
-		
-		#RECURSIVE STEP: call backtrack
-		#move to the next cell
-		var result = backtrack(arr, x+1, y)
-		
-		#If there were valid options:
-		if result !=null:
-			return result
-		#BACKTRACK: if we got to a dead end, reset grid:
-		arr[y][x] = backup_grid[0]
-		arr[y][x+1] = backup_grid[1]
-		arr[y+1][x] = backup_grid[2]
-		arr[y+1][x+1] = backup_grid[3]
-		
-	return null; #if nothing in loop worked, start func again
-		
-	
-	
-	
 func generate_grid(n : int):
 	var size = n
 	var grid = []
@@ -214,22 +162,9 @@ func generate_grid(n : int):
 func generate_map():
 	# 1. Initialize the 20x20 grid with 0s
 	var grid = generate_grid(5)
-	
 	# Set a random seed at [0,0]
 	grid[0][0] = randi_range(1, 3)
 	
-	var result = backtrack(grid, 0, 0) #start at top left
-	if result != null:
-		print("--Final Grid--")
-		print_grid(result)
-		return result
-	else:
-		print("--Failure: No valid configuration possible--")
-		return null
-		
-	return grid
-	
-	"""
 	# 2. Define sliding window traversal
 	for y in range(grid.size()-1):
 		for x in range(grid.size()-1):
@@ -258,7 +193,6 @@ func generate_map():
 			grid[y+1][x+1] = chosen_replacement[1][1]
 			
 	return grid
-	"""
 #- - - - - - - - - - - - - - - - 
 
 
