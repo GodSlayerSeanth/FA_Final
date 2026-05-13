@@ -4,6 +4,8 @@ Created by Liam Bouwman, Jaidyn Carroll, and Ashtyn Gagner<br/><br/>
 ### Overview
 This program uses the wave function collapse algorithm to generate a large maze from a smaller sample image. The program works by breaking the sample image into pieces, and adding rotations and reflections, therefore creating rules for the larger randomly generated maze to follow. 
 
+---
+
 ### How it Works
 - **Takes in the sample maze image**
   - ` read_grid_from_tilemap() `
@@ -20,10 +22,12 @@ This program uses the wave function collapse algorithm to generate a large maze 
   - ` generate_grid() `
   - ` backtrack() `
 
+---
+
 ### Implementation
-To implement this program into this program you must first attach the script to a TileMapLayer. Then import a Tileset of your choice into this TileMapLayer. Add a custom data layer {Tile_Type:Int} Then assign unique values to each of the tiles in your TileSet. Draw a sample for the program to generate from onto the scene editor and hit go. If you want infinite generation, assign a node to the exported value “player”. If you desire to seed your generation assign which tile you would like to use as the exported value “Seed”
+To implement this program into this program you must first attach the script to a TileMapLayer. Then import a Tileset of your choice into this TileMapLayer. Add a custom data layer {Tile_Type:Int}. Then assign unique values to each of the tiles in your TileSet. Draw a sample for the program to generate from onto the scene editor and hit go. If you want infinite generation, assign a node to the exported value “player”. If you desire to seed your generation assign which tile you would like to use as the exported value “Seed”
 
-
+---
 
 ### Wave Function Collapse: Limitations and Hurdles:
 We tried many methods when working with WFC. Our first attempt was doing a simple sliding window with a set of tiles. We used a 2x2 grid that would simply iterate across the area. This worked but was unstable and didn’t contain any form of backtracking. Next we added a simple form of backtracking simply retrying the last step if we failed, but this still didn't work very well. 
