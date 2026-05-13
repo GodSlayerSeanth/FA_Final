@@ -2,8 +2,10 @@ extends TileMapLayer
 #Globals
 @export var Seed: int = 1
 @export var player: Node2D
+var neighbors = []
 
-const max_Steps = 60000
+
+const max_Steps = 100000
 const RIM_SIZE = 1 
 const TOTAL_GRID_SIZE = Chunk_Size + (RIM_SIZE * 2) 
 #	Chunking
@@ -24,6 +26,11 @@ var generation_queue: Array = []
 var last_chunk = Vector2i(-99999, 99999)
 var frame_counter = 0
 const GENERATE_INTERVAL = 20
+
+
+# Acknowledgement: Claude was used to assist in code formatting and code generation. The primary bulk of code was written by us. Feel free to look back at older versions of the code to see the messier and unfinished versions. Look to read me for explanations on how everything works. 
+# It was used because there were major hurdles that were causing fundamental logical bugs in the code. These bugs were often spotted with the help of Claude. But the design of the algorithm and implementation made by us
+
 
 #==============================
 #======= Chunk Gen ============
@@ -79,7 +86,7 @@ func Generate_Chunk(grid: Array) -> Array:
 			continue 
 		else:
 			
-			# --- Collapse Tile ---
+			
 			var chosen = valids[randi() % valids.size()]
 			working_grid[pos.x][pos.y] = chosen
 			_update_guidebook(pos.x, pos.y)
@@ -120,15 +127,15 @@ func _Generate(chunk_pos: Vector2i) -> void:
 
 	# Cardinal Rims
 	for i in range(Chunk_Size):
-		if n_chunk: input_grid[i + RIM_SIZE][0]                  = n_chunk[i][Chunk_Size - 1]
+		if n_chunk: input_grid[i + RIM_SIZE][0] = n_chunk[i][Chunk_Size - 1]
 		if s_chunk: input_grid[i + RIM_SIZE][TOTAL_GRID_SIZE - 1] = s_chunk[i][0]
-		if w_chunk: input_grid[0][i + RIM_SIZE]                  = w_chunk[Chunk_Size - 1][i]
+		if w_chunk: input_grid[0][i + RIM_SIZE] = w_chunk[Chunk_Size - 1][i]
 		if e_chunk: input_grid[TOTAL_GRID_SIZE - 1][i + RIM_SIZE] = e_chunk[0][i]
 
 	# Corner Rims
-	if nw_chunk: input_grid[0][0]                                    = nw_chunk[Chunk_Size - 1][Chunk_Size - 1]
-	if ne_chunk: input_grid[TOTAL_GRID_SIZE - 1][0]                  = ne_chunk[0][Chunk_Size - 1]
-	if sw_chunk: input_grid[0][TOTAL_GRID_SIZE - 1]                  = sw_chunk[Chunk_Size - 1][0]
+	if nw_chunk: input_grid[0][0] = nw_chunk[Chunk_Size - 1][Chunk_Size - 1]
+	if ne_chunk: input_grid[TOTAL_GRID_SIZE - 1][0] = ne_chunk[0][Chunk_Size - 1]
+	if sw_chunk: input_grid[0][TOTAL_GRID_SIZE - 1] = sw_chunk[Chunk_Size - 1][0]
 	if se_chunk: input_grid[TOTAL_GRID_SIZE - 1][TOTAL_GRID_SIZE - 1] = se_chunk[0][0]
 
 	var result = Generate_Chunk(input_grid)
@@ -463,7 +470,7 @@ func Get_3x3_Valids(neighbors: Array) -> Array:
 	return valid_tile_ids
 
 func _get_neighbors(tx: int, ty: int, working_grid: Array) -> Array:
-	var neighbors = []
+	neighbors = []
 	for x in range(3):
 		var col = []
 		for y in range(3):
