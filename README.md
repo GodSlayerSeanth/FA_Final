@@ -1,6 +1,8 @@
 # Maze Using Wave Function Collapse in Godot
 Created by Liam Bouwman, Jaidyn Carroll, and Ashtyn Gagner<br/><br/>
 
+---
+
 ### Overview
 This program uses the wave function collapse algorithm to generate a large maze from a smaller sample image. The program works by breaking the sample image into pieces, and adding rotations and reflections, therefore creating rules for the larger randomly generated maze to follow. 
 
