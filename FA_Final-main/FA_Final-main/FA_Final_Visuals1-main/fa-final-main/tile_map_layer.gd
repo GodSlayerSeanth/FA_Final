@@ -2,8 +2,10 @@ extends TileMapLayer
 #Globals
 @export var Seed: int = 1
 @export var player: Node2D
+var neighbors = []
 
-const max_Steps = 60000
+
+const max_Steps = 100000
 const RIM_SIZE = 1 
 const TOTAL_GRID_SIZE = Chunk_Size + (RIM_SIZE * 2) 
 #	Chunking
@@ -463,7 +465,7 @@ func Get_3x3_Valids(neighbors: Array) -> Array:
 	return valid_tile_ids
 
 func _get_neighbors(tx: int, ty: int, working_grid: Array) -> Array:
-	var neighbors = []
+	neighbors = []
 	for x in range(3):
 		var col = []
 		for y in range(3):
