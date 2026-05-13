@@ -27,7 +27,7 @@ This program uses the wave function collapse algorithm to generate a large maze 
 ---
 
 ## Implementation
-To implement this program into this program you must first attach the script to a TileMapLayer. Then import a Tileset of your choice into this TileMapLayer. Add a custom data layer {Tile_Type:Int}. Then assign unique values to each of the tiles in your TileSet. Draw a sample for the program to generate from onto the scene editor and hit go. If you want infinite generation, assign a node to the exported value “player”. If you desire to seed your generation assign which tile you would like to use as the exported value “Seed”
+To implement this program into this program you must first attach the script to a TileMapLayer. Then import a Tileset of your choice into this TileMapLayer. Add a custom data layer {Tile_Type:Int}. Then assign unique values to each of the tiles in your TileSet. Draw a sample for the program to generate from onto the scene editor and hit go. If you want infinite generation, assign a node to the exported value “player”. If you desire to seed your generation assign which tile you would like to use as the exported value “Seed.”
 
 ---
 
