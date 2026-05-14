@@ -2,7 +2,10 @@
 Created by Liam Bouwman, Jaidyn Carroll, and Ashtyn Gagner<br/><br/>
 
 ---
+
 <img width="693" height="649" alt="image" src="https://github.com/user-attachments/assets/1f0d380c-2b0a-463c-94ad-4dcd9d8a9fcf" />
+
+---
 
 ## Overview
 This program uses the wave function collapse algorithm to generate a large maze from a smaller sample image. The program works by breaking the sample image into pieces, and adding rotations and reflections, therefore creating rules for the larger randomly generated maze to follow. 
